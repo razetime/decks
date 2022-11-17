@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:2
+card:0
 size:[512,342]
 name:"flappybird.deck"
 
@@ -27,7 +27,7 @@ image:"%%IMG2AgABVgD\/AP8A\/wD\/AP8A\/wD\/AP8A\/wD\/AP8A\/wD\/AP8A\/wD\/AP8A\/wD
 script:"game.0"
 {widgets}
 bird:{"type":"canvas","size":[36,24],"pos":[113,150],"script":"game.1","border":0,"image":"%%IMG0ACQAGAAH\/4AAAHgYYAAAeBhgAAGAYBgAAYBgGAAGAGBmAAYAYGYAGABgZgAYAGBmAB\/4GAYAH\/gYBgBgBgf\/gGAGB\/+AYAYYAGBgBhgAYB\/4Z\/+AH\/hn\/4AGABgBgAYAGAGAAeAH\/gAB4Af+AAAf+AAAAB\/4AAAAAAAAAA==","draggable":1,"scale":1}
-flap:{"type":"button","size":[507,36],"pos":[3,303],"script":"game.2","show":"transparent","text":"Flap  (up arrow)","style":"rect"}
+flap:{"type":"button","size":[507,36],"pos":[3,303],"script":"game.2","text":"Flap  (up arrow)","style":"rect"}
 dy:{"type":"slider","size":[100,25],"pos":[5,48],"script":"game.3","show":"none","interval":[-100,100]}
 sdisp:{"type":"field","size":[487,15],"pos":[7,24],"font":"menu","show":"transparent","border":0,"value":"Score: 0"}
 score:{"type":"slider","size":[100,25],"pos":[5,80],"show":"none","interval":[0,9999],"format":"%i","style":"compact"}
@@ -141,7 +141,7 @@ script:"home.0"
 {widgets}
 retry:{"type":"button","size":[81,42],"pos":[205,190],"script":"death.0","text":"Retry","style":"rect"}
 field1:{"type":"field","size":[57,17],"pos":[217,137],"locked":1,"show":"transparent","border":0,"value":{"text":["","You died!"],"font":["","menu"],"arg":["",""]}}
-score:{"type":"field","size":[115,15],"pos":[188,166],"locked":1,"show":"transparent","border":0,"align":"center","value":"Score: 0"}
+score:{"type":"field","size":[115,15],"pos":[188,166],"locked":1,"show":"transparent","border":0,"align":"center","value":"Score: 1"}
 
 {script:death.0}
 on click do
