@@ -1,7 +1,7 @@
 # decks
 [Decker](https://beyondloom.com/decker) decks, modules and scripts written in Lil.
 
-`index.deck` is generated using a deck skeleton and `gen.lil`. Lil is designed beautifully to allow one to effectively build
+`docs/index.html` is generated using a 'template' deck `index.deck`  and `gen.lil`. Lil is designed beautifully to allow one to effectively build
 static sites purely with in-house functionality from decker. See `readdeck[]` and `writedeck[]` in the
 [lilt manual](https://beyondloom.com/decker/lilt.html) for more details.
 
