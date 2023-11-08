@@ -1,0 +1,13 @@
+root:"https://razetime.github.io/decks/%s.html"
+i:readdeck["index.deck"]
+l:"index" drop -1 drop ".deck\n" split shell["ls *.deck"].out
+i.card.widgets.list.value:table each x in l
+  ("text","font","arg") dict (("%s\n\n" format readdeck["%s.deck" format x].name),"menu",(root format x))
+end
+show[i.card.widgets.list.value]
+on wchk x y do
+  print["%s  %s" format (x,("failure", "success")[writedeck[("docs/%s.html" format x) y]])]
+end
+wchk["index" i]
+each x in l wchk[x readdeck["%s.deck" format x]] end
+
