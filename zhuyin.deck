@@ -1,6 +1,6 @@
 {deck}
 version:1
-card:1
+card:0
 size:[512,342]
 name:"Zhuyin Trainer"
 author:"Razetime"
@@ -19,7 +19,7 @@ field2:{"type":"field","size":[15,13],"pos":[174,108],"locked":1,"border":0,"val
 field3:{"type":"field","size":[15,13],"pos":[226,108],"locked":1,"border":0,"value":"po"}
 field4:{"type":"field","size":[18,13],"pos":[279,108],"locked":1,"border":0,"value":"mo"}
 field5:{"type":"field","size":[18,13],"pos":[332,108],"locked":1,"border":0,"value":"fo"}
-read:{"type":"button","size":[105,46],"pos":[136,163],"text":"Reading"}
+read:{"type":"button","size":[105,46],"pos":[136,163],"script":"home.1","text":"Reading"}
 type:{"type":"button","size":[105,46],"pos":[279,163],"text":"Typing"}
 training:{"type":"field","size":[100,20],"pos":[211,136],"locked":1,"border":0,"style":"code","align":"center","value":"Train"}
 field1:{"type":"field","size":[100,20],"pos":[211,220],"locked":1,"border":0,"style":"code","align":"center","value":"Inspect\n"}
@@ -41,8 +41,55 @@ on make_scaled_font font scale name do
 end
 {end}
 
-{card:card1}
+{script:home.1}
+symbols:("1", "q", "a", "z", "2", "w", "s", "x", "e", "d", "c", "r", "f", "v",
+ "5", "t", "g", "b", "y", "h", "n",
+ "8", "i", "k", ",", "9", "o", "l", ".", "0", "p", ";", "/", "-", "u", "j", "m")
+chars:("b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh",
+ "ch", "sh", "r", "z", "c", "s","a", "e", "o", "E", "ai", "ei", "ao", "ou", "an",
+ "en", "ang", "eng", "er", "i/yi", "u", "U")
+sc:count symbols
+# symd:chars dict symbols
+tones:"3467"
+tonechars:"3","4","2","stop"
+# tond:tonechars dict tones
+on click do
+ each x in (list "test%i") format range 10
+  deck.remove[deck.cards[x]]
+  deck.add["card" x]
+  show[deck.cards]
+  type: random[0,1]
+
+  # if type
+   crd:deck.cards[x]
+   crd.add["field" "symbol"]
+   cs:deck.cards[x].widgets.symbol
+   cs.font:"b2"
+   cs.text:symbols[n:random[sc]]
+   cs.pos:250,100
+   cs.size:50,50
+   ans:chars[n]
+   opts:random[sc 4]
+   opts[random[4]]:n
+   each y in range 4
+    nm:"opt%i" format y
+    crd.add["button" nm]
+    crd.widgets[nm].text:chars[opts[y]]
+    crd.widgets[nm].pos:(80+100*y),200
+   end
+  # else
+   # deck.cards[x].add["field" "pinyin"]
+   # 
+  # end
+ end
+ 
+ go["test0"]
+end
+{end}
+
+{card:chart}
 image:"%%IMG2AgABVgD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8ATgFkAA0BbAAOAZUAfwFmAAsBbgAMAZcAfgFmAAsBbgAMAZcAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDABsBAQBEAQMACwEDAGgBAwAMAQMAkQEDAH4BAwAaAQMAQwEDAAsBAwBoAQMADAEDAJEBAwB+AQMAGwEBAEQBAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAQMAaAEDAAwBAwCRAQMAfgEDAGABAwALAW4ADAEDAJEBAwB+AQMAYAEDAAsBbgAMAQMAkQEDAH4BAwBgAQMADAFsAA0BAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQEDAJEBAwB+AQMAYAEDAIUBAwCRAQMAfgEDAGABAwCFAQMAkQEDAH4BAwBgAQMAhQGXAH4BAwBgAQMAhQGXAH4BAwBgAQMAhgGVAH8BAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAQMAYAEDAP8AmwEDAGABAwD/AJsBAwBgAQMA/wCbAWYA/wCbAWYA/wCcAWQA/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AIs="
+script:"chart.0"
 {widgets}
 consonants:{"type":"field","size":[74,275],"pos":[49,50],"locked":1,"border":0,"value":{"text":["","1"," - b","\nq"," - p","\na"," - m","\nz"," - f","\n2"," - d","\nw"," - t","\ns"," - n","\nx"," - l","\ne"," - g","\nd"," - k","\nc"," - h","\nr"," - j","\nf"," - q","\nv"," - x","\n5"," - zh","\nt"," - ch","\ng"," - sh","\nb"," - r","\ny"," - z\n","h"," - c\n","n"," - s"],"font":["","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo",""],"arg":["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]}}
 consonants_title:{"type":"field","size":[74,20],"pos":[49,29],"locked":1,"border":0,"value":{"text":["","Consonants"],"font":["","menu"],"arg":["",""]}}
@@ -55,4 +102,94 @@ field6:{"type":"field","size":[71,15],"pos":[173,90],"locked":1,"border":0,"valu
 field7:{"type":"field","size":[74,20],"pos":[160,29],"locked":1,"border":0,"value":{"text":["","Tones"],"font":["","menu"],"arg":["",""]}}
 field8:{"type":"field","size":[122,20],"pos":[284,29],"locked":1,"border":0,"value":{"text":["","Rhymes and Medials"],"font":["","menu"],"arg":["",""]}}
 field9:{"type":"field","size":[121,219],"pos":[284,50],"locked":1,"border":0,"value":{"text":["","8"," - a","\ni"," - e (\"uh\")","\nk"," - o","\n,"," - e (upwards)","\n9"," - ai","\no"," - ei (\"ey\")","\nl"," - ao","\n."," - ou","\n0"," - an","\np"," - en","\n;"," - ang","\n/"," - eng","\n-"," - er","\nu"," - i/yi","\nj"," - u","\nm"," - u (\"you\")"],"font":["","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo","","bopomofo",""],"arg":["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]}}
+
+{script:chart.0}
+on view do
+ 
+end
+{end}
+
+{card:progress}
+{widgets}
+progress:{"type":"field","size":[59,19],"pos":[216,31],"locked":1,"border":0,"value":{"text":["","Progress"],"font":["","menu"],"arg":["",""]}}
+
+{card:test0}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"1"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"e"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"sh"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"b"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"b"}
+
+{card:test1}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"o"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"ang"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"ei"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"z"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"a"}
+
+{card:test2}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"q"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"p"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"an"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"U"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"n"}
+
+{card:test3}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"w"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"t"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"b"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"p"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"l"}
+
+{card:test4}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":","}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"er"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"h"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"k"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"E"}
+
+{card:test5}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"d"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"d"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"U"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"k"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"i/yi"}
+
+{card:test6}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"5"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"h"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"q"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"zh"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"an"}
+
+{card:test7}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"o"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"ou"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"zh"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"ei"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"k"}
+
+{card:test8}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":"9"}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"er"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"j"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"ai"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"ei"}
+
+{card:test9}
+{widgets}
+symbol:{"type":"field","size":[50,50],"pos":[200,100],"font":"b1","value":","}
+opt0:{"type":"button","size":[60,20],"pos":[80,200],"text":"c"}
+opt1:{"type":"button","size":[60,20],"pos":[180,200],"text":"E"}
+opt2:{"type":"button","size":[60,20],"pos":[280,200],"text":"c"}
+opt3:{"type":"button","size":[60,20],"pos":[380,200],"text":"eng"}
 
